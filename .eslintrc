@@ -1,0 +1,45 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "ignorePatterns": [
+    "!**/*",
+    "*.js",
+    "node_modules",
+    "dist",
+    ".eslintrc.cjs"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "unused-imports",
+    "react",
+    "react-hooks"
+  ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "prettier",
+    "plugin:@conarti/feature-sliced/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "react-hooks/exhaustive-deps": "warn",
+    "import/order": "error",
+    "@conarti/feature-sliced/layers-slices": "error",
+    "@conarti/feature-sliced/absolute-relative": "error",
+    "@conarti/feature-sliced/public-api": "error"
+  }
+}
