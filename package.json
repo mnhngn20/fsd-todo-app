@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
+    "@tanstack/react-router": "^1.81.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.456.0",
@@ -23,6 +24,8 @@
     "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
     "@eslint/js": "^9.14.0",
     "@feature-sliced/eslint-config": "^0.1.1",
+    "@tanstack/router-devtools": "^1.81.0",
+    "@tanstack/router-plugin": "^1.79.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
