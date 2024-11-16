@@ -29,6 +29,7 @@ jobs:
           pnpm run check-types
 
   build:
+    needs: [lint]
     strategy:
       matrix:
         node-version: [18.x]
