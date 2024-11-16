@@ -1,19 +1,54 @@
 name: Node.js CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  lint:
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}. Use PNPM
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PNPM
         uses: pnpm/action-setup@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-      - run: pnpm run build --if-present
-      - run: pnpm run test
+          version: 8
+
+      - name: Install Project Dependencies
+        run: pnpm i
+
+      - name: Linting & Checking types for project
+        run: |
+          pnpm run lint
+          pnpm run check-types
+
+  build:
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: 18.x
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Install Project Dependencies
+        run: pnpm i
+
+      - name: Linting & Checking types for project
+        run: |
+          pnpm run lint
+          pnpm run check-types
