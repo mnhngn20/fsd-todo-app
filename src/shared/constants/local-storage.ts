@@ -1,1 +1,2 @@
 export const ACCESS_TOKEN_LS_KEY = 'ACCESS_TOKEN_LS_KEY';
+export const TASKS_LS_KEY = 'TASK_LS_KEY';

@@ -5,9 +5,13 @@ export async function getMe(): Promise<GetMeResponse | undefined> {
   await delay(1000);
 
   return {
-    email: 'mnhngn20@gmail.com',
-    firstName: 'Minh',
-    id: '1',
-    lastName: 'Nguyen'
+    message: 'Success',
+    success: true,
+    user: {
+      email: 'mnhngn20@gmail.com',
+      firstName: 'Minh',
+      id: '1',
+      lastName: 'Nguyen'
+    }
   };
 }

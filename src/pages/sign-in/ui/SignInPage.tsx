@@ -1,18 +1,18 @@
 import { useNavigate } from '@tanstack/react-router';
 import { SignInForm, withGuardRoute } from '@/features/authenticate';
 import { SignInResponse } from '@/entities/authentication';
-import { useFetchMe } from '@/entities/user';
+import { useSetCurrentUser } from '@/entities/user';
 import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';
 import { useToast } from '@/shared/hooks';
 import { localStorageSetItem } from '@/shared/lib';
 
 function SignInPageContainer() {
   const { toast } = useToast();
-  const fetchMe = useFetchMe();
+  const setCurrentUser = useSetCurrentUser();
   const navigate = useNavigate();
 
   const onSignInSuccess = (resp: SignInResponse) => {
-    const { accessToken, message } = resp;
+    const { accessToken, message, user } = resp;
 
     localStorageSetItem(ACCESS_TOKEN_LS_KEY, accessToken);
 
@@ -21,7 +21,7 @@ function SignInPageContainer() {
       description: message
     });
 
-    fetchMe();
+    setCurrentUser(user);
 
     navigate({
       to: '/',

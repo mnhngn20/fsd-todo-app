@@ -1,5 +1,7 @@
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { useNavigate } from '@tanstack/react-router';
 import { LogoutButton } from '@/features/authenticate';
+import { useGetCurrentUser } from '@/entities/user';
 import {
   Avatar,
   AvatarFallback,
@@ -12,10 +14,8 @@ import {
 } from '@/shared/ui';
 
 export function HeaderMenu() {
-  const user = {
-    name: 'Minh Nguyen',
-    email: 'mnhngn20@gmail.com'
-  };
+  const navigate = useNavigate();
+  const currentUser = useGetCurrentUser();
 
   return (
     <DropdownMenu>
@@ -24,27 +24,54 @@ export function HeaderMenu() {
           <Avatar className="h-9 w-9">
             <AvatarImage
               src="/placeholder.svg?height=32&width=32"
-              alt={user.name}
+              alt={currentUser?.name ?? ''}
             />
-            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+            <AvatarFallback>{currentUser?.name?.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col items-start">
-            <div className="text-sm font-medium">{user.name}</div>
-            <div className="text-xs text-gray-500">{user.email}</div>
+            <div className="text-sm font-medium">{currentUser?.name}</div>
+            <div className="text-xs text-gray-500">{currentUser?.email}</div>
           </div>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuItem className="flex-col items-start">
+        <DropdownMenuItem
+          className="flex-col items-start"
+          onClick={() =>
+            navigate({
+              to: '/all-tasks'
+            })
+          }
+        >
           <Button variant="ghost" size="sm">
             <Icon fontSize={10} icon="line-md:account" />
             Manage Profile
           </Button>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex-col items-start">
+        <DropdownMenuItem
+          className="flex-col items-start"
+          onClick={() =>
+            navigate({
+              to: '/all-tasks'
+            })
+          }
+        >
+          <Button variant="ghost" size="sm">
+            <Icon fontSize={10} icon="line-md:calendar" />
+            Today Tasks
+          </Button>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="flex-col items-start"
+          onClick={() =>
+            navigate({
+              to: '/all-tasks'
+            })
+          }
+        >
           <Button variant="ghost" size="sm">
             <Icon fontSize={10} icon="line-md:check-list-3-filled" />
-            Manage Task
+            All Tasks
           </Button>
         </DropdownMenuItem>
         <DropdownMenuItem>

@@ -8,13 +8,11 @@ import { User } from './user.type';
 export interface IUserContext {
   currentUser?: User;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>;
-  fetchMe: () => void;
 }
 
 const defaultValue: IUserContext = {
   currentUser: undefined,
-  setCurrentUser: () => {},
-  fetchMe: () => {}
+  setCurrentUser: () => {}
 };
 
 export const UserContext = React.createContext<IUserContext>(defaultValue);
@@ -27,19 +25,15 @@ export const UserContextProvider = ({
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
   const [getMe, { loading }] = useGetMe();
 
-  const fetchMe = () => {
+  useLayoutEffect(() => {
     if (localStorageGetItem(ACCESS_TOKEN_LS_KEY)) {
       (async () => {
-        const me = await getMe();
-        if (me) {
-          setCurrentUser(me);
+        const resp = await getMe();
+        if (resp?.success) {
+          setCurrentUser(resp.user);
         }
       })();
     }
-  };
-
-  useLayoutEffect(() => {
-    fetchMe();
   }, []);
 
   if (loading) {
@@ -50,8 +44,7 @@ export const UserContextProvider = ({
     <UserContext.Provider
       value={{
         currentUser,
-        setCurrentUser,
-        fetchMe
+        setCurrentUser
       }}
     >
       {children}
@@ -64,14 +57,12 @@ export const useSetCurrentUser = () => {
 
   return setCurrentUser;
 };
-export const useFetchMe = () => {
-  const { fetchMe } = useContext(UserContext);
-
-  return fetchMe;
-};
 
 export const useGetCurrentUser = () => {
   const { currentUser } = useContext(UserContext);
 
-  return currentUser;
+  return {
+    ...currentUser,
+    name: currentUser?.firstName ?? '' + currentUser?.lastName ?? ''
+  } as User & { name: string };
 };
