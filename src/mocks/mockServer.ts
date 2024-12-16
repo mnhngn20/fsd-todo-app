@@ -1,6 +1,6 @@
 import {
-  LoginInput,
-  LoginResponse,
+  SignInInput,
+  SignInResponse,
   RegisterInput,
   RegisterResponse
 } from '@/entities/authentication';
@@ -25,7 +25,7 @@ export class MockServer {
     this.todo = localStorageGetItem(LocalStorageKeys.Todo, []);
   }
 
-  async login({ email, password }: LoginInput): Promise<LoginResponse> {
+  async login({ email, password }: SignInInput): Promise<SignInResponse> {
     const foundUser = this.users.find(
       user =>
         user.email === email &&

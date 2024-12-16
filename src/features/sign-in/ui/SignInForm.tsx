@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
+import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
-import { useToast } from '@/shared/hooks/useToast';
+import { SignInResponse } from '@/entities/authentication';
 import {
   Input,
   Button,
@@ -12,29 +13,33 @@ import {
   CardTitle,
   Label
 } from '@/shared/ui';
-import { useLogin } from '../model/useLogin';
+import { useSignIn } from '../model/useSignIn';
 
-export function SignInForm() {
+interface SignInFormProps {
+  onSignInSuccess?: (resp: SignInResponse) => void;
+  onSignInError?: (error: Error) => void;
+}
+
+export function SignInForm({
+  onSignInSuccess,
+  onSignInError
+}: SignInFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { toast } = useToast();
-  const [login, { loading }] = useLogin();
+  const [signIn, { loading }] = useSignIn();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      toast({
-        title: 'Error',
-        description: 'An error occurred'
-      });
-      await login({ email, password });
-    } catch {
-      toast({
-        title: 'Error',
-        description: 'An error occurred'
-      });
+      const resp = await signIn({ email, password });
+
+      if (resp?.success) {
+        onSignInSuccess?.(resp);
+      }
+    } catch (error) {
+      onSignInError?.(error as Error);
     }
   };
 
@@ -79,9 +84,9 @@ export function SignInForm() {
       <CardFooter className="flex justify-center">
         <p className="text-sm text-gray-600">
           Don't have an account?{' '}
-          <a href="/sign-up" className="text-blue-600 hover:underline">
+          <Link href="/sign-up" className="text-blue-600 hover:underline">
             Sign up
-          </a>
+          </Link>
         </p>
       </CardFooter>
     </Card>

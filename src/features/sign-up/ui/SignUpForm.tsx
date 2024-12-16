@@ -1,4 +1,6 @@
+import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
+import { useToast } from '@/shared/hooks/useToast';
 import {
   Button,
   Input,
@@ -11,23 +13,23 @@ import {
   CardTitle
 } from '@/shared/ui';
 
-interface SignUpFormProps {
-  onSignUp: (name: string, email: string, password: string) => void;
-}
-
-export function SignUpForm({ onSignUp }: SignUpFormProps) {
+export function SignUpForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords don't match");
+      toast({
+        title: 'Validation failed',
+        description: `Passwords don't match`
+      });
       return;
     }
-    onSignUp(name, email, password);
+    // onSignUp(name, email, password);
   };
 
   return (
@@ -90,9 +92,9 @@ export function SignUpForm({ onSignUp }: SignUpFormProps) {
       <CardFooter className="flex justify-center">
         <p className="text-sm text-gray-600">
           Already have an account?{' '}
-          <a href="/sign-in" className="text-blue-600 hover:underline">
+          <Link href="/sign-in" className="text-blue-600 hover:underline">
             Sign in
-          </a>
+          </Link>
         </p>
       </CardFooter>
     </Card>

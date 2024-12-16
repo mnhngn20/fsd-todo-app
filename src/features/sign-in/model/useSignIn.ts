@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { login, LoginInput } from '@/entities/authentication';
+import { signIn, SignInInput } from '@/entities/authentication';
 
-export function useLogin() {
+export function useSignIn() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
 
-  const loginFn = async (input: LoginInput) => {
+  const signInFn = async (input: SignInInput) => {
     try {
       setLoading(true);
-      await login(input);
+      return await signIn(input);
     } catch (error) {
       setError(error as Error);
     } finally {
@@ -16,8 +16,8 @@ export function useLogin() {
     }
   };
 
-  return [loginFn, { loading, error }] as [
-    typeof loginFn,
+  return [signInFn, { loading, error }] as [
+    typeof signInFn,
     { loading: boolean; error: Error }
   ];
 }

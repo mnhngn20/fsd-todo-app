@@ -1,3 +1,4 @@
+/* eslint-disable @conarti/feature-sliced/public-api */
 import { createLazyFileRoute } from '@tanstack/react-router';
 
 export const Route = createLazyFileRoute('/')({

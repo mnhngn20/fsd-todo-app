@@ -1,2 +1,2 @@
-export * from './login.type';
-export * from './register.type';
+export * from './sign-in.type';
+export * from './sign-up.type';
