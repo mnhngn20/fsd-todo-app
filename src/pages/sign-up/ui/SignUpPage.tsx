@@ -1,9 +1,29 @@
+import { useNavigate } from '@tanstack/react-router';
 import { SignUpForm } from '@/features/sign-up';
+import { SignUpResponse, withGuardRoute } from '@/entities/authentication';
+import { useToast } from '@/shared/hooks';
 
-export function SignUpPage() {
-  const onSignUpSuccess = () => {};
+function SignUpPageContainer() {
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const onSignUpSuccess = (resp: SignUpResponse) => {
+    const { message } = resp;
+    toast({
+      title: 'Success',
+      description: message
+    });
 
-  const onSignUpError = () => {};
+    navigate({
+      to: '/'
+    });
+  };
+
+  const onSignUpError = () => {
+    toast({
+      title: 'Error',
+      description: 'An error occurred'
+    });
+  };
 
   return (
     <SignUpForm
@@ -12,3 +32,5 @@ export function SignUpPage() {
     />
   );
 }
+
+export const SignUpPage = withGuardRoute(SignUpPageContainer);

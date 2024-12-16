@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/shared/ui';
-import { useSignUp } from '../model/useSignUp';
+import { useSignUp } from '../hooks/useSignUp';
 
 interface SignUpFormProps {
   onSignUpSuccess?: (resp: SignUpResponse) => void;

@@ -1,10 +1,11 @@
 import { SignInForm } from '@/features/sign-in';
 import { SignInResponse } from '@/entities/authentication';
+import { withGuardRoute } from '@/entities/authentication';
 import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';
 import { useToast } from '@/shared/hooks';
 import { localStorageSetItem } from '@/shared/lib';
 
-export function SignInPage() {
+function SignInPageContainer() {
   const { toast } = useToast();
 
   const onSignInSuccess = (resp: SignInResponse) => {
@@ -30,3 +31,5 @@ export function SignInPage() {
     />
   );
 }
+
+export const SignInPage = withGuardRoute(SignInPageContainer);

@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { SignInResponse } from '@/entities/authentication';
 import {
@@ -7,13 +6,13 @@ import {
   Button,
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
-  Label
+  Label,
+  CardHeader
 } from '@/shared/ui';
-import { useSignIn } from '../model/useSignIn';
+import { useSignIn } from '../hooks/useSignIn';
+import { Header } from './Header';
+import { SignUpSentence } from './SignUpSentence';
 
 interface SignInFormProps {
   onSignInSuccess?: (resp: SignInResponse) => void;
@@ -46,10 +45,7 @@ export function SignInForm({
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle>Sign In</CardTitle>
-        <CardDescription>
-          Enter your credentials to access your account
-        </CardDescription>
+        <Header />
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
@@ -82,12 +78,7 @@ export function SignInForm({
         </form>
       </CardContent>
       <CardFooter className="flex justify-center">
-        <p className="text-sm text-gray-600">
-          Don't have an account?{' '}
-          <Link href="/sign-up" className="text-blue-600 hover:underline">
-            Sign up
-          </Link>
-        </p>
+        <SignUpSentence />
       </CardFooter>
     </Card>
   );
