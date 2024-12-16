@@ -1,15 +1,10 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
 import { SignInForm } from '@/features/sign-in';
 import { SignInResponse } from '@/entities/authentication';
 import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';
-import { useToast } from '@/shared/hooks/useToast';
+import { useToast } from '@/shared/hooks';
 import { localStorageSetItem } from '@/shared/lib';
 
-export const Route = createLazyFileRoute('/sign-in')({
-  component: SignInPage
-});
-
-function SignInPage() {
+export function SignInPage() {
   const { toast } = useToast();
 
   const onSignInSuccess = (resp: SignInResponse) => {

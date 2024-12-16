@@ -1,11 +1,11 @@
-export type RegisterInput = {
+export type SignUpInput = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
 };
 
-export type RegisterResponse = {
+export type SignUpResponse = {
   success: boolean;
   message: string;
 };

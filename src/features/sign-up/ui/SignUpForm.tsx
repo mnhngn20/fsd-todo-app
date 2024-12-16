@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
+import { SignUpResponse } from '@/entities/authentication';
 import { useToast } from '@/shared/hooks/useToast';
 import {
   Button,
@@ -12,15 +13,27 @@ import {
   CardHeader,
   CardTitle
 } from '@/shared/ui';
+import { useSignUp } from '../model/useSignUp';
 
-export function SignUpForm() {
-  const [name, setName] = useState('');
+interface SignUpFormProps {
+  onSignUpSuccess?: (resp: SignUpResponse) => void;
+  onSignUpError?: (error: Error) => void;
+}
+
+export function SignUpForm({
+  onSignUpError,
+  onSignUpSuccess
+}: SignUpFormProps) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [signUp, { loading }] = useSignUp();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast({
@@ -29,7 +42,16 @@ export function SignUpForm() {
       });
       return;
     }
-    // onSignUp(name, email, password);
+
+    try {
+      const resp = await signUp({ email, password, firstName, lastName });
+
+      if (resp?.success) {
+        onSignUpSuccess?.(resp);
+      }
+    } catch (error) {
+      onSignUpError?.(error as Error);
+    }
   };
 
   return (
@@ -42,13 +64,24 @@ export function SignUpForm() {
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="name">First Name</Label>
               <Input
                 id="name"
                 type="text"
-                placeholder="John Doe"
-                value={name}
-                onChange={e => setName(e.target.value)}
+                placeholder="John"
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="name">Last Name</Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="Doe"
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
                 required
               />
             </div>
@@ -84,7 +117,7 @@ export function SignUpForm() {
               />
             </div>
           </div>
-          <Button type="submit" className="w-full mt-6">
+          <Button loading={loading} type="submit" className="w-full mt-6">
             Sign Up
           </Button>
         </form>

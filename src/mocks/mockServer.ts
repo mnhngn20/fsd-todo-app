@@ -1,8 +1,8 @@
 import {
   SignInInput,
   SignInResponse,
-  RegisterInput,
-  RegisterResponse
+  SignUpInput,
+  SignUpResponse
 } from '@/entities/authentication';
 import { User } from '@/entities/user';
 import { delay } from '@/shared/lib';
@@ -51,7 +51,7 @@ export class MockServer {
     firstName,
     lastName,
     password
-  }: RegisterInput): Promise<RegisterResponse> {
+  }: SignUpInput): Promise<SignUpResponse> {
     const hasExisted = !!this.users.find(user => user.email === email);
 
     if (hasExisted) {

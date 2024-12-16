@@ -1,9 +1,9 @@
 import { delay } from '@/shared/lib';
-import { RegisterInput, RegisterResponse } from '../model';
+import { SignUpInput, SignUpResponse } from '../model';
 
-export async function register(
-  input: RegisterInput
-): Promise<RegisterResponse | undefined> {
+export async function signUp(
+  input: SignUpInput
+): Promise<SignUpResponse | undefined> {
   try {
     console.log('Register with input ', input);
     await delay(1000);
