@@ -1,6 +1,6 @@
 import { useNavigate } from '@tanstack/react-router';
-import { SignUpForm } from '@/features/sign-up';
-import { SignUpResponse, withGuardRoute } from '@/entities/authentication';
+import { SignUpForm, withGuardRoute } from '@/features/authenticate';
+import { SignUpResponse } from '@/entities/authentication';
 import { useToast } from '@/shared/hooks';
 
 function SignUpPageContainer() {

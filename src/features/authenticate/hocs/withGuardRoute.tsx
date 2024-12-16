@@ -1,8 +1,7 @@
 /* eslint-disable react/display-name */
 import { useNavigate } from '@tanstack/react-router';
-import { useEffect } from 'react';
-import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';
-import { localStorageGetItem } from '@/shared/lib';
+import { useLayoutEffect } from 'react';
+import { useIsAuthenticated } from '../hooks/useIsAuthenticated';
 
 export function withGuardRoute<T extends object>(
   WrappedComponent: React.ComponentType<T>,
@@ -10,21 +9,22 @@ export function withGuardRoute<T extends object>(
 ) {
   return function (props: T) {
     const navigate = useNavigate();
-    useEffect(() => {
-      const accessToken = localStorageGetItem(ACCESS_TOKEN_LS_KEY);
-      if (!accessToken && isPrivate) {
+    const isAuthenticated = useIsAuthenticated();
+
+    useLayoutEffect(() => {
+      if (!isAuthenticated && isPrivate) {
         navigate({
           to: '/sign-in',
           replace: true
         });
       }
-      if (accessToken && !isPrivate) {
+      if (isAuthenticated && !isPrivate) {
         navigate({
           to: '/',
           replace: true
         });
       }
-    }, [navigate]);
+    }, [isAuthenticated, navigate]);
 
     if (!navigator.onLine) location.reload();
     return <WrappedComponent {...props} />;
