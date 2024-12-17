@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { useIsAuthenticated } from '@/features/authenticate';
 import { Button } from '@/shared/ui';
-import { FEATURE_LIST } from '../constants/feature-list';
+import { FEATURE_LIST } from '../model/feature-list.constant';
 import { FeatureIcon } from './FeatureIcon';
 import { Footer } from './Footer';
 

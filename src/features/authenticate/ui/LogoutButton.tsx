@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react/dist/iconify.js';
+import { Icon } from '@iconify/react';
 import { useNavigate } from '@tanstack/react-router';
 import { useSetCurrentUser } from '@/entities/user';
 import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';

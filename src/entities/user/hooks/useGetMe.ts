@@ -2,8 +2,8 @@ import { useLayoutEffect } from '@tanstack/react-router';
 import { useState } from 'react';
 import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';
 import { localStorageGetItem } from '@/shared/lib';
-import { getMe } from '../api';
-import { User } from '../model';
+import { getMe } from '../api/get-me';
+import { User } from '../model/user.type';
 
 export function useGetMe() {
   const [loading, setLoading] = useState(

@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react/dist/iconify.js';
+import { Icon } from '@iconify/react';
 import { useNavigate } from '@tanstack/react-router';
 import { LogoutButton } from '@/features/authenticate';
 import { useGetCurrentUser } from '@/entities/user';
