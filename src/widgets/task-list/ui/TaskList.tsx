@@ -15,7 +15,7 @@ export function TaskList({ isToday }: TaskListProps) {
 
   if (loading) {
     return (
-      <div className="flex h-[70vh] items-center justify-center">
+      <div className="flex h-[80vh] items-center justify-center">
         <Icon icon="line-md:loading-twotone-loop" />
       </div>
     );
@@ -23,7 +23,7 @@ export function TaskList({ isToday }: TaskListProps) {
 
   if (!tasks?.length) {
     return (
-      <div className="flex h-[70vh] flex-col justify-center items-center gap-2 text-md text-gray-900">
+      <div className="flex h-[80vh] flex-col justify-center items-center gap-2 text-md text-gray-900">
         <span>
           You don't have any tasks right now. Try to get a little bit busy,
           shall we?
@@ -34,7 +34,7 @@ export function TaskList({ isToday }: TaskListProps) {
   }
 
   return (
-    <div className="w-full h-[70vh] p-4 overflow-y-auto flex flex-col gap-2">
+    <div className="w-full h-[80vh] p-4 overflow-y-auto flex flex-col gap-2">
       <div className="flex justify-end">
         <CreateTaskModal onCreateTaskSuccess={refetch} />
       </div>
