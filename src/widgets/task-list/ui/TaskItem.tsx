@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { useDeleteTask } from '@/features/task/delete';
-import { useToggleTaskComplete } from '@/features/task/update';
+import { UpdateTaskModal, useToggleTaskComplete } from '@/features/task/update';
 import { Task } from '@/entities/task';
 import { formatDate } from '@/shared/lib/date';
 import { Button, Checkbox } from '@/shared/ui';
@@ -18,12 +18,14 @@ interface TaskItemProps {
   task: Task;
   onToggleTaskCompletedSuccess?: () => void;
   onDeleteTaskSuccess?: () => void;
+  onUpdateSuccess?: () => void;
 }
 
 export function TaskItem({
   task,
   onToggleTaskCompletedSuccess,
-  onDeleteTaskSuccess
+  onDeleteTaskSuccess,
+  onUpdateSuccess
 }: TaskItemProps) {
   const [completed, setCompleted] = useState(task.completed);
   const [toggleTaskComplete] = useToggleTaskComplete();
@@ -56,6 +58,7 @@ export function TaskItem({
           </div>
         </div>
         <div className="flex items-center space-x-2">
+          <UpdateTaskModal task={task} onUpdateSuccess={onUpdateSuccess} />
           <Button
             variant="ghost"
             size="sm"

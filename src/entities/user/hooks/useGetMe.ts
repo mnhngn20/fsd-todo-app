@@ -1,8 +1,16 @@
+import { useLayoutEffect } from '@tanstack/react-router';
 import { useState } from 'react';
+import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';
+import { localStorageGetItem } from '@/shared/lib';
 import { getMe } from '../api';
+import { User } from '../model';
 
 export function useGetMe() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(
+    !!localStorageGetItem(ACCESS_TOKEN_LS_KEY)
+  );
+  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+
   const [error, setError] = useState<Error>();
 
   const getMeFn = async () => {
@@ -16,8 +24,21 @@ export function useGetMe() {
     }
   };
 
-  return [getMeFn, { loading, error }] as [
-    typeof getMeFn,
-    { loading: boolean; error: Error }
-  ];
+  useLayoutEffect(() => {
+    if (localStorageGetItem(ACCESS_TOKEN_LS_KEY)) {
+      (async () => {
+        const resp = await getMeFn();
+        if (resp?.success) {
+          setCurrentUser(resp.user);
+        }
+      })();
+    }
+  }, []);
+
+  return {
+    loading,
+    currentUser,
+    setCurrentUser,
+    error
+  };
 }

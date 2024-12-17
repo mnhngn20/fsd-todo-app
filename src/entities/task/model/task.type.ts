@@ -6,7 +6,7 @@ export interface Task {
   id: string;
   title: string;
   completed: boolean;
-  dueDate: Date | null;
+  dueDate?: Date | null;
   owner: User;
   ownerId: string;
   createdAt: Date;

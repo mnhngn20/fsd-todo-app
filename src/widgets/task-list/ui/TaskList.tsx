@@ -43,6 +43,7 @@ export function TaskList({ isToday }: TaskListProps) {
           <TaskItem
             onToggleTaskCompletedSuccess={refetch}
             onDeleteTaskSuccess={refetch}
+            onUpdateSuccess={refetch}
             task={task}
             key={task.id}
           />

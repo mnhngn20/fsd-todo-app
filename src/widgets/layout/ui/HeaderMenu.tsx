@@ -52,7 +52,7 @@ export function HeaderMenu() {
           className="flex-col items-start"
           onClick={() =>
             navigate({
-              to: '/all-tasks'
+              to: '/today-tasks'
             })
           }
         >

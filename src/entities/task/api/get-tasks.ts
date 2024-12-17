@@ -8,5 +8,14 @@ export async function getTasks(input: GetTasksInput): Promise<GetTaskResponse> {
   await delay(1000);
 
   const tasks: Task[] = localStorageGetItem(TASKS_LS_KEY, []);
-  return { items: tasks, message: 'Success', success: true };
+  return {
+    items: tasks.map(task => ({
+      ...task,
+      createdAt: new Date(task.createdAt),
+      dueDate: task.dueDate ? new Date(task.dueDate) : new Date(),
+      updatedAt: new Date(task.updatedAt)
+    })),
+    message: 'Success',
+    success: true
+  };
 }

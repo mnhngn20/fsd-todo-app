@@ -22,7 +22,7 @@ export function HomePage() {
             </p>
             {isAuthenticated ? (
               <Button size="lg" asChild>
-                <Link href="/sign-up">Go Manage your task</Link>
+                <Link href="/all-tasks">Go Manage your task</Link>
               </Button>
             ) : (
               <Button size="lg" asChild>

@@ -1,6 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from 'react';
-import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';
-import { localStorageGetItem } from '@/shared/lib';
+import React, { useContext } from 'react';
 import { LoadingScreen } from '@/shared/ui';
 import { useGetMe } from '../hooks/useGetMe';
 import { User } from './user.type';
@@ -22,19 +20,7 @@ export const UserContextProvider = ({
 }: {
   children: JSX.Element;
 }) => {
-  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
-  const [getMe, { loading }] = useGetMe();
-
-  useLayoutEffect(() => {
-    if (localStorageGetItem(ACCESS_TOKEN_LS_KEY)) {
-      (async () => {
-        const resp = await getMe();
-        if (resp?.success) {
-          setCurrentUser(resp.user);
-        }
-      })();
-    }
-  }, []);
+  const { currentUser, loading, setCurrentUser } = useGetMe();
 
   if (loading) {
     return <LoadingScreen />;
@@ -61,8 +47,11 @@ export const useSetCurrentUser = () => {
 export const useGetCurrentUser = () => {
   const { currentUser } = useContext(UserContext);
 
-  return {
-    ...currentUser,
-    name: currentUser?.firstName ?? '' + currentUser?.lastName ?? ''
-  } as User & { name: string };
+  if (currentUser) {
+    return {
+      ...currentUser,
+      name: currentUser?.firstName ?? '' + currentUser?.lastName ?? ''
+    } as User & { name: string };
+  }
+  return undefined;
 };
