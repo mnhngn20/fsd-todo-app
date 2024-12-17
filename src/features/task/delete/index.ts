@@ -1,1 +1,1 @@
-export * from './hooks';
+export { useDeleteTask } from './hooks/useDeleteTask';
