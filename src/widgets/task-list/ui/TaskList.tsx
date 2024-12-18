@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Icon } from '@iconify/react';
 import { CreateTaskModal } from '@/features/task/create';
-import { useGetTasks } from '../api/useGetTasks';
+import { useGetTasks } from '@/features/task/get-list';
 import { TaskItem } from './TaskItem';
 
 interface TaskListProps {
