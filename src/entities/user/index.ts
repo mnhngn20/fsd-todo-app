@@ -8,4 +8,4 @@ export {
 } from './model/user.context';
 export type { IUserContext } from './model/user.context';
 export type { User } from './model/user.type';
-export { useGetMe } from './hooks/useGetMe';
+export { useGetMe } from './api/useGetMe';

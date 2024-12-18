@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router';
 import { SignUpForm, withGuardRoute } from '@/features/authenticate';
 import { SignUpResponse } from '@/entities/authentication';
-import { useToast } from '@/shared/hooks';
+import { useToast } from '@/shared/ui';
 
 function SignUpPageContainer() {
   const { toast } = useToast();

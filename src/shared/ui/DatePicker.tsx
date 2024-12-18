@@ -16,8 +16,6 @@ export function DatePicker({
   onChange,
   placeholder = 'Pick a date'
 }: DatePickerProps) {
-  console.log(value);
-
   return (
     <Popover>
       <PopoverTrigger>

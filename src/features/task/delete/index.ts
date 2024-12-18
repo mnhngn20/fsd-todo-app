@@ -1,1 +1,1 @@
-export { useDeleteTask } from './hooks/useDeleteTask';
+export { useDeleteTask } from './model/useDeleteTask';

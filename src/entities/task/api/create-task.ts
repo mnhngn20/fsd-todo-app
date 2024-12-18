@@ -1,7 +1,7 @@
 import { TASKS_LS_KEY } from '@/shared/constants';
 import { delay, localStorageGetItem, localStorageSetItem } from '@/shared/lib';
-import { Task } from '../model';
 import { CreateTaskInput, CreateTaskResponse } from '../model/create-task.type';
+import { Task } from '../model/task.type';
 
 export async function createTask(
   task: CreateTaskInput

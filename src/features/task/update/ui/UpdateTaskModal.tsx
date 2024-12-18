@@ -14,7 +14,7 @@ import {
   DialogTrigger,
   DatePicker
 } from '@/shared/ui';
-import { useUpdateTask } from '../hooks/useUpdateTask';
+import { useUpdateTask } from '../model/useUpdateTask';
 
 interface UpdateTaskModalProps {
   task: Task;

@@ -1,5 +1,5 @@
 import { delay } from '@/shared/lib';
-import { SignUpInput, SignUpResponse } from '../model';
+import { SignUpInput, SignUpResponse } from '../model/sign-up.type';
 
 export async function signUp(
   input: SignUpInput

@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { useNavigate } from '@tanstack/react-router';
 import { useLayoutEffect } from 'react';
-import { useIsAuthenticated } from '../hooks/useIsAuthenticated';
+import { useIsAuthenticated } from './useIsAuthenticated';
 
 export function withGuardRoute<T extends object>(
   WrappedComponent: React.ComponentType<T>,

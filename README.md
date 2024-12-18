@@ -1,3 +1,27 @@
+# An simple Todo App with Feature Sliced Design architecture
+
+App is using 6 layers:
+
+- app
+- pages
+- widgets
+- features
+- entities
+- shared
+
+Segments convention for each layer and slices:
+
+- app
+  - generated: containing generated file from `@tanstack/router`, this is where the package can refer type from
+  - routers: a file-based routing folder that import from layer `pages`
+  - styles: global styles & theme
+- pages, features, entities
+  - ui: only contain react components (JSX files)
+  - model: contain business related code such as constants, type defs, contexts,... (optional)
+  - hooks: contain react hooks
+  - hocs: contain react higher order component
+  - services: functions that are used in
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

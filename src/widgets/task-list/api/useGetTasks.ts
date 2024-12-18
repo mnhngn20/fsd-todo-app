@@ -31,8 +31,6 @@ export function useGetTasks({ isToday }: Props) {
     }
   };
 
-  console.log('aaa', tasks);
-
   return {
     tasks: isToday
       ? tasks?.filter(task => {

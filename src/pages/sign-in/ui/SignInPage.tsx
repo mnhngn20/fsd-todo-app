@@ -3,8 +3,8 @@ import { SignInForm, withGuardRoute } from '@/features/authenticate';
 import { SignInResponse } from '@/entities/authentication';
 import { useSetCurrentUser } from '@/entities/user';
 import { ACCESS_TOKEN_LS_KEY } from '@/shared/constants';
-import { useToast } from '@/shared/hooks';
 import { localStorageSetItem } from '@/shared/lib';
+import { useToast } from '@/shared/ui';
 
 function SignInPageContainer() {
   const { toast } = useToast();

@@ -1,7 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { SignUpResponse } from '@/entities/authentication';
-import { useToast } from '@/shared/hooks/useToast';
 import {
   Button,
   Input,
@@ -13,7 +12,8 @@ import {
   CardHeader,
   CardTitle
 } from '@/shared/ui';
-import { useSignUp } from '../hooks/useSignUp';
+import { useToast } from '@/shared/ui/useToast';
+import { useSignUp } from '../model/useSignUp';
 
 interface SignUpFormProps {
   onSignUpSuccess?: (resp: SignUpResponse) => void;

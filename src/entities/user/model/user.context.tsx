@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { LoadingScreen } from '@/shared/ui';
-import { useGetMe } from '../hooks/useGetMe';
+import { useGetMe } from '../api/useGetMe';
 import { User } from './user.type';
 
 export interface IUserContext {

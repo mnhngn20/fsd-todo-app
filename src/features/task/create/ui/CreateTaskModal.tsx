@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Task } from '@/entities/task';
 import { useGetCurrentUser } from '@/entities/user';
-import { useToast } from '@/shared/hooks';
+import { useToast } from '@/shared/ui';
 import {
   Button,
   DatePicker,
@@ -16,7 +16,7 @@ import {
   Label,
   Textarea
 } from '@/shared/ui';
-import { useCreateTask } from '../hooks/useCreateTask';
+import { useCreateTask } from '../model/useCreateTask';
 
 interface Props {
   onCreateTaskSuccess?: () => void;

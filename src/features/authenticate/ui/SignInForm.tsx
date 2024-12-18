@@ -13,7 +13,7 @@ import {
   CardTitle,
   CardDescription
 } from '@/shared/ui';
-import { useSignIn } from '../hooks/useSignIn';
+import { useSignIn } from '../model/useSignIn';
 
 interface SignInFormProps {
   onSignInSuccess?: (resp: SignInResponse) => void;
