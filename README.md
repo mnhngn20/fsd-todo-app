@@ -11,72 +11,43 @@ App is using 6 layers:
 
 Segments convention for each layer and slices:
 
-- app
+- For `app` layer:
   - generated: containing generated file from `@tanstack/router`, this is where the package can refer type from
   - routers: a file-based routing folder that import from layer `pages`
   - styles: global styles & theme
-- pages, features, entities
+- For `pages`, `widgets`, `features`, `entities` layers:
   - ui: only contain react components (JSX files)
-  - model: contain business related code such as constants, type defs, contexts,... (optional)
-  - hooks: contain react hooks
-  - hocs: contain react higher order component
-  - services: functions that are used in
+  - model: contain business related code such as constants, type defs, contexts,...
+  - api: Backend requests or wrapped hooks with the request
+  - lib: library related code (not used)
+  - services: business functions that are used in components and hooks
+- For `shared` layer:
+  - assets: contain images, icons, svgs,...
+  - configs: app configuration
+  - lib: wrapped library code for convenience usage
+  - ui: non-business-related reuseable components or everything related to ui
 
-# React + TypeScript + Vite
+# Tech stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- React + Typescript
+- Vite
+- Shadcn
+- Tanstack Router
+- Tailwind CSS
+- Pnpm
 
-Currently, two official plugins are available:
+# Linter:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ESlint
+- Prettier
+- Steiger (a liner for FSD architecture): view `./steiger.config.js` for customized configuration
 
-## Expanding the ESLint configuration
+# Development:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Run `pnpm dev` to start local development mode
+- Port `5173`
+- `Steiger` is also watching code changes to capture FSD's rule violation code
 
-- Configure the top-level `parserOptions` property like this:
+# Dependency Graph
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
-
-Segments will have:
-
-- ui (for UI components)
-- hooks (for React hooks)
-- hocs (for React hocs)
-- services (business contained logic file)
-- model (for schemas & type)
+- Run `pnpm draw-dependency-graph` to get output from `dependency-cruiser` npm package. This result is automatically copied to machine's clipboard for generating SVG (consider using online Graphviz tool: https://dreampuf.github.io/GraphvizOnline/?engine=dot#digraph%20G%20%7B%0A%0A%0A%7D)
