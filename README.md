@@ -40,7 +40,7 @@ Segments convention for each layer and slices:
 
 - ESlint
 - Prettier
-- Steiger (a liner for FSD architecture): view `./steiger.config.js` for customized configuration
+- Steiger (a linter for FSD architecture): view `./steiger.config.js` for customized configuration
 
 # Development:
 
