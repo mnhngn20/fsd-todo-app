@@ -1,6 +1,6 @@
 /* eslint-disable @conarti/feature-sliced/layers-slices */
 /** This is a cross import, refer to: https://feature-sliced.design/docs/reference/public-api#public-api-for-cross-imports */
-import { User } from '@/entities/user/@x/authentication';
+import { User } from '@/entities/user/@x/task';
 
 export interface Task {
   id: string;
