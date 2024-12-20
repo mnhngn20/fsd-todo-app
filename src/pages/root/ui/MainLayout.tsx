@@ -1,5 +1,5 @@
 import { UserContextProvider } from '@/entities/user';
-import { Header } from './ui/Header';
+import { Header } from './Header';
 
 interface MainLayoutProps {
   children: JSX.Element;
