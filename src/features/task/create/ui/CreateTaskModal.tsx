@@ -47,7 +47,7 @@ export function CreateTaskModal({ onCreateTaskSuccess }: Props) {
           new Date(new Date().setDate(new Date().getDate() + 2)),
         owner: user!,
         ownerId: user?.id ?? '',
-        title: newTask?.description ?? '',
+        title: newTask?.title ?? '',
         updatedAt: new Date()
       });
 
